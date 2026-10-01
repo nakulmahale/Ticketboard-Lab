@@ -1,8 +1,4 @@
-# SKYNET L1 Linux Ticket Board + Practice Lab v2
-
-Author: Kishor Ahire  
-Institute: Skynet Linux Training Centre  
-Platform: RHEL 10
+# Linux Ticket Board + Practice Lab v2
 
 ## New in v2
 
