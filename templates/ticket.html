@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><title>Ticket #{{ t.id }}</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="top"><div class="brand">Ticket #{{ t.id }} - {{ t.title }}</div><div><a href="/dashboard">Dashboard</a> | <a href="/logout">Logout</a></div></div>
+<div class="wrap"><div class="card">
+<p><b>Priority:</b> <span class="badge {{ t.priority }}">{{ t.priority }}</span></p>
+<p><b>Category:</b> {{ t.category }}</p>
+<p><b>Status:</b> {{ t.status }}</p>
+<p><b>Assigned To:</b> {{ t.assigned_to }}</p>
+<h2>Description</h2><p>{{ t.description }}</p>
+<h2>Hint</h2><p class="yellow">{{ t.hint }}</p>
+{% if not admin and t.assigned_to == session.user and t.status != 'resolved' %}
+<form method="post" action="/resolve/{{ t.id }}">
+<h2>Resolution Note</h2>
+<textarea class="input" name="note" placeholder="Write what command you used and root cause..."></textarea><br><br>
+<button class="btn greenb">Submit for Auto Check</button>
+</form>
+{% endif %}
+{% if t.check_output %}<h2>Checker Output</h2><pre>{{ t.check_output }}</pre>{% endif %}
+{% if t.status == 'resolved' %}<h2 class="green">Solved Successfully - Score {{ t.score }}</h2>{% endif %}
+</div></div></body></html>

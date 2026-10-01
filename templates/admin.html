@@ -1,0 +1,32 @@
+<!DOCTYPE html><html><head><title>{{ app_name }}</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="top"><div class="brand">🚀 <span>SKYNET</span> L1 Ticket Board - Admin</div><div><a href="/admin/ticket-pool">Ticket Pool</a> | <a href="/logout">Logout</a></div></div>
+<div class="wrap">
+<div class="grid">
+<div class="card"><h2>Open</h2><div class="big green">{{ stats.open }}</div></div>
+<div class="card"><h2>Assigned</h2><div class="big yellow">{{ stats.assigned }}</div></div>
+<div class="card"><h2>Resolved</h2><div class="big green">{{ stats.resolved }}</div></div>
+<div class="card"><h2>Students</h2><div class="big">{{ stats.students }}</div></div>
+</div>
+<br>
+<div class="card">
+<h2>Auto Ticket Generator</h2>
+<form method="post" action="/admin/auto-generate">
+<input class="input" name="count" value="10" type="number" min="1" max="100">
+<button class="btn greenb">Generate Tickets</button>
+<a class="btn yellowb" href="/admin/reset" onclick="return confirm('Reset all tickets?')">Reset Lab</a>
+</form>
+</div>
+<br>
+<div class="card"><h2>All Tickets</h2>
+<table><tr><th>ID</th><th>Priority</th><th>Category</th><th>Title</th><th>Status</th><th>Assigned</th><th>Score</th><th>Action</th></tr>
+{% for t in tickets %}
+<tr><td>#{{ t.id }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td>{{ t.category }}</td><td><a href="/ticket/{{ t.id }}">{{ t.title }}</a></td><td>{{ t.status }}</td><td>{{ t.assigned_to }}</td><td>{{ t.score }}</td>
+<td><a class="btn redb" href="/admin/break/{{ t.id }}">Break Test Machine</a></td></tr>
+{% endfor %}
+</table></div>
+<br>
+<div class="card"><h2>Student Accounts</h2>
+<table><tr><th>Username</th><th>Password</th><th>Name</th><th>Role</th></tr>
+{% for u in users %}<tr><td>{{ u.username }}</td><td>{{ u.password }}</td><td>{{ u.fullname }}</td><td>{{ u.role }}</td></tr>{% endfor %}
+</table></div>
+</div></body></html>

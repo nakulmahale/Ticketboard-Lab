@@ -1,0 +1,8 @@
+<!DOCTYPE html><html><head><title>Ticket Pool</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="top"><div class="brand">SKYNET Ticket Pool</div><div><a href="/dashboard">Dashboard</a></div></div>
+<div class="wrap"><div class="card"><table><tr><th>ID</th><th>Priority</th><th>Category</th><th>Title</th><th>Create</th></tr>
+{% for id,t in pool %}
+<tr><td>{{ id }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td>{{ t.category }}</td><td>{{ t.title }}</td>
+<td><form method="post" action="/admin/create-ticket"><input type="hidden" name="ticket_id" value="{{ id }}"><button class="btn">Create</button></form></td></tr>
+{% endfor %}
+</table></div></div></body></html>

@@ -1,0 +1,22 @@
+<!DOCTYPE html><html><head><title>{{ app_name }}</title><link rel="stylesheet" href="/static/style.css"></head>
+<body><div class="top"><div class="brand">🎫 <span>SKYNET</span> L1 Ticket Board - Student</div><div>{{ session.user }} | <a href="/logout">Logout</a></div></div>
+<div class="wrap">
+<div class="card"><h2>My Tickets</h2>
+<table><tr><th>ID</th><th>Priority</th><th>Category</th><th>Title</th><th>Status</th><th>Score</th><th>Action</th></tr>
+{% for t in my %}
+<tr><td>#{{ t.id }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td>{{ t.category }}</td><td>{{ t.title }}</td><td>{{ t.status }}</td><td>{{ t.score }}</td><td><a class="btn" href="/ticket/{{ t.id }}">Open</a></td></tr>
+{% endfor %}
+</table></div>
+<br>
+<div class="card"><h2>Available Tickets</h2><p class="yellow">Rule: Once you pick one ticket, it will not show to other students.</p>
+<table><tr><th>ID</th><th>Priority</th><th>Category</th><th>Title</th><th>Created</th><th>Action</th></tr>
+{% for t in available %}
+<tr><td>#{{ t.id }}</td><td><span class="badge {{ t.priority }}">{{ t.priority }}</span></td><td>{{ t.category }}</td><td>{{ t.title }}</td><td>{{ t.created_at }}</td><td><a class="btn greenb" href="/pick/{{ t.id }}">Pick Ticket</a></td></tr>
+{% endfor %}
+</table></div>
+<br>
+<div class="card"><h2>Leaderboard</h2>
+<table><tr><th>Student</th><th>Solved</th><th>Total Score</th></tr>
+{% for l in leaderboard %}<tr><td>{{ l.assigned_to }}</td><td>{{ l.solved }}</td><td>{{ l.total }}</td></tr>{% endfor %}
+</table></div>
+</div></body></html>
